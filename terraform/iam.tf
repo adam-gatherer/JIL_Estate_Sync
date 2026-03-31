@@ -126,3 +126,45 @@ resource "aws_iam_role_policy_attachment" "codebuild_attach" {
   role       = aws_iam_role.codebuild_role.name
   policy_arn = aws_iam_policy.codebuild_policy.arn
 }
+
+
+
+# role for eventbridge
+resource "aws_iam_role" "eventbridge_role" {
+  name = "jil-eventbridge-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = "events.amazonaws.com"
+      }
+      Action = "sts:AssumeRole"
+    }]
+  })
+}
+
+
+# policy to allow eventbridge to start codebuild
+resource "aws_iam_policy" "eventbridge_policy" {
+  name = "jil-eventbridge-policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = [
+        "codebuild:StartBuild"
+      ]
+      Effect   = "Allow"
+      Resource = aws_codebuild_project.jil_sync.arn
+    }]
+  })
+}
+
+
+# attach policy to eventbridge role
+resource "aws_iam_role_policy_attachment" "eventbridge_attach" {
+  role       = aws_iam_role.eventbridge_role.name
+  policy_arn = aws_iam_policy.eventbridge_policy.arn
+}
