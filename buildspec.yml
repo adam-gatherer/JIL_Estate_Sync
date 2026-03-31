@@ -17,13 +17,5 @@ phases:
 
   build:
     commands:
-      - echo "Pull latest JIL from S3"
-      - mkdir -p jil_files
-      - aws s3 cp s3://$BUCKET/jil_files/ jil_files/ --recursive --exclude "*" --include "*.jil"
-
-      - git config user.name "ajg-bot"
-      - git config user.email "bot@local"
-
-      - git add jil_files/*.jil
-      - git commit -m "Updated JIL files" || echo "No changes"
-      - git push
+      - chmod +x scripts/sync_jil_to_github.sh
+      - ./scripts/sync_jil_to_github.sh

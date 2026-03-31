@@ -26,6 +26,11 @@ resource "aws_codebuild_project" "jil_sync" {
       name  = "SECRET_ARN"
       value = var.github_pat_secret_arn
     }
+
+    environment_variable {
+      name  = "REVIEWERS"
+      value = var.reviewers
+    }
   }
 
   artifacts {

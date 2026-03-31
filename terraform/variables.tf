@@ -31,3 +31,12 @@ variable "s3_lifecycle_days" {
   description = "Days before JIL files expire"
   type        = number
 }
+
+
+
+# reviewers for PR
+variable "reviewers" {
+  description = "Comma-separated GitHub reviewers"
+  type        = string
+  default     = ""
+}
