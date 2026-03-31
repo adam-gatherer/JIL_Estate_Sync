@@ -3,6 +3,9 @@ resource "aws_s3_bucket" "jil_exports" {
   bucket = local.jil_bucket_name
 
   force_destroy = true
+  tags = {
+    Name = "jil-exports"
+  }
 }
 
 # setup public access blocking

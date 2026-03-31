@@ -31,4 +31,8 @@ resource "aws_codebuild_project" "jil_sync" {
   artifacts {
     type = "NO_ARTIFACTS"
   }
+
+  tags = {
+    Name = "jil-codebuild"
+  }
 }
