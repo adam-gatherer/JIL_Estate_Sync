@@ -23,6 +23,6 @@ phases:
       - git config user.name "ajg-bot"
       - git config user.email "bot@local"
 
-      - git add PROD.jil
+      - git add jil_files/PROD.jil
       - git commit -m "Update PROD.jil" || echo "No changes"
       - git push
