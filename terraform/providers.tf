@@ -71,8 +71,8 @@ resource "aws_instance" "jil_ec2" {
 #!/bin/bash
 
 # install awscli if not present
-#commented out for troubleshooting
-#dnf install -y awscli
+dnf install -y awscli
+aws configure set region eu-west-2
 
 cat <<EOT > /home/ec2-user/PROD.jil
 /* -------- P01_TEST_JOB -------- */
