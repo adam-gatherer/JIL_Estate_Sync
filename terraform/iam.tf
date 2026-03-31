@@ -86,6 +86,13 @@ resource "aws_iam_policy" "codebuild_policy" {
       },
       {
         Action = [
+          "s3:ListBucket"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:s3:::${local.jil_bucket_name}"
+      },
+      {
+        Action = [
           "secretsmanager:GetSecretValue"
         ]
         Effect   = "Allow"
