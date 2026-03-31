@@ -19,7 +19,7 @@ phases:
     commands:
       - echo "Pull latest JIL from S3"
       - mkdir -p jil_files
-      - aws s3 cp s3://$BUCKET/prod/ jil_files/ --recursive --exclude "*" --include "*.jil"
+      - aws s3 cp s3://$BUCKET/jil_files/ jil_files/ --recursive --exclude "*" --include "*.jil"
 
       - git config user.name "ajg-bot"
       - git config user.email "bot@local"

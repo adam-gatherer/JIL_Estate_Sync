@@ -62,7 +62,7 @@ EOT
 
 chown ec2-user:ec2-user /home/ec2-user/JIL/*.jil
 
-aws s3 cp /home/ec2-user/JIL/ s3://${local.jil_bucket_name}/ --recursive --exclude "*" --include "*.jil"
+aws s3 cp /home/ec2-user/JIL/ s3://${local.jil_bucket_name}/jil_files/ --recursive --exclude "*" --include "*.jil"
 
 EOF
   tags = {
