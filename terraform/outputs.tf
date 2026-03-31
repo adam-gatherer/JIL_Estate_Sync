@@ -8,3 +8,9 @@ output "ec2_public_ip" {
 output "jil_bucket_name" {
   value = aws_s3_bucket.jil_exports.bucket
 }
+
+
+# output codebuild
+output "codebuild_project_name" {
+  value = aws_codebuild_project.jil_sync.name
+}
