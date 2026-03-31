@@ -26,7 +26,7 @@ CodeBuild retrieves the files, creates a branch, and raises a PR in GitHub.
 
 ```mermaid
 flowchart TD
-    A['Autosys' EC2] --> B[S3 Bucket\n(jil_files/)]
+    A['Autosys' EC2] --> B[S3 Bucket]
     B --> C[EventBridge Trigger]
     C --> D[CodeBuild Project]
     D --> E[Clone GitHub Repo]
