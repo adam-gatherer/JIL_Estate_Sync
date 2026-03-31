@@ -42,8 +42,6 @@ git commit -m "Automated JIL update"
 git push origin $BRANCH
 
 
-git fetch origin master:master || true
-
 # Opens a PR from the new branch into master using GitHub API
 REPO_PATH=${REPO_URL#https://github.com/}
 REPO_PATH=${REPO_PATH%.git}
