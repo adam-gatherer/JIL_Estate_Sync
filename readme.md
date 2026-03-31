@@ -1,3 +1,23 @@
+# JIL Estate Sync
+
+<!-- Tech Stack Badges -->
+![AWS](https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white)
+![Amazon S3](https://img.shields.io/badge/Amazon%20S3-569A31?style=for-the-badge&logo=amazon-s3&logoColor=white)
+![AWS CodeBuild](https://img.shields.io/badge/AWS%20CodeBuild-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Amazon EventBridge](https://img.shields.io/badge/Amazon%20EventBridge-FF4F8B?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![AWS IAM](https://img.shields.io/badge/AWS%20IAM-DD344C?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![AWS Secrets Manager](https://img.shields.io/badge/AWS%20Secrets%20Manager-7D3C98?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Amazon EC2](https://img.shields.io/badge/Amazon%20EC2-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)
+
+----
+![Status](https://img.shields.io/badge/status-active-success)
+![Built With](https://img.shields.io/badge/built%20with-Terraform-blue)
+
+----
+
 ## 1. Overview
 
 This project implements an AWS-native, event-driven pipeline to automate the publishing of Autosys JIL exports to GitHub, removing manual intervention and improving auditability.
