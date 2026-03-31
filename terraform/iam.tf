@@ -21,13 +21,22 @@ resource "aws_iam_policy" "ec2_s3_policy" {
 
   policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [{
-      Action = [
-        "s3:PutObject"
-      ]
-      Effect   = "Allow"
-      Resource = "arn:aws:s3:::${local.jil_bucket_name}/*"
-    }]
+    Statement = [
+      {
+        Action = [
+          "s3:PutObject"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:s3:::${local.jil_bucket_name}/*"
+      },
+      {
+        Action = [
+          "s3:ListBucket"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:s3:::${local.jil_bucket_name}"
+      }
+    ]
   })
 }
 
