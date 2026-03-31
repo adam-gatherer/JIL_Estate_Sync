@@ -105,7 +105,7 @@ resource "aws_iam_policy" "codebuild_policy" {
           "secretsmanager:GetSecretValue"
         ]
         Effect   = "Allow"
-        Resource = "${var.github_pat_secret_arn}*"
+        Resource = "arn:aws:secretsmanager:${var.aws_region}:*:secret:jil-estate-sync/github-pat*"
       },
       {
         Action = [
