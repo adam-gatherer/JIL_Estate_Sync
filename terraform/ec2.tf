@@ -35,7 +35,7 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
 cat <<EOT > /home/ec2-user/JIL/PROD.jil
 /* -------- P01_TEST_JOB -------- */
-/* Generated at: ${TIMESTAMP} */
+/* Generated at: $${TIMESTAMP} */
 insert_job: P01_TEST_JOB
 job_type: CMD
 command: echo hello
@@ -44,7 +44,7 @@ EOT
 
 cat <<EOT > /home/ec2-user/JIL/PPE.jil
 /* -------- R01_TEST_JOB -------- */
-/* Generated at: ${TIMESTAMP} */
+/* Generated at: $${TIMESTAMP} */
 insert_job: R01_TEST_JOB
 job_type: CMD
 command: echo hello
@@ -53,7 +53,7 @@ EOT
 
 cat <<EOT > /home/ec2-user/JIL/TEST.jil
 /* -------- T01_TEST_JOB -------- */
-/* Generated at: ${TIMESTAMP} */
+/* Generated at: $${TIMESTAMP} */
 insert_job: T01_TEST_JOB
 job_type: CMD
 command: echo hello
