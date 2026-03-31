@@ -41,6 +41,8 @@ EOT
 
 chown ec2-user:ec2-user /home/ec2-user/PROD.jil
 
+aws s3 cp /home/ec2-user/PROD.jil s3://${local.jil_bucket_name}/prod/PROD.jil
+
 EOF
   tags = {
     Name = "jil-ec2"
