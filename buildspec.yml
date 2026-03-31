@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - command -v jq >/dev/null 2>&1 || (apt-get update && apt-get install -y jq)
+      - command -v git >/dev/null 2>&1 || (apt-get update && apt-get install -y git)
+
+  pre_build:
+    commands:
+      - echo "Fetching GitHub PAT"
+      - PAT=$(aws secretsmanager get-secret-value --secret-id $SECRET_ARN --query SecretString --output text | jq -r .AJG_GITHUB_TOKEN)
+
+      - echo "Cloning repo"
+      - git clone https://$PAT@${REPO_URL#https://}
+      - cd $(basename -s .git $REPO_URL)
+
+  build:
+    commands:
+      - echo "Pull latest JIL from S3"
+      - aws s3 cp s3://$BUCKET/prod/PROD.jil PROD.jil
+
+      - git config user.name "ajg-bot"
+      - git config user.email "bot@local"
+
+      - git add PROD.jil
+      - git commit -m "Update PROD.jil" || echo "No changes"
+      - git push
