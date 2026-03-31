@@ -68,22 +68,23 @@ resource "aws_instance" "jil_ec2" {
   associate_public_ip_address = true
 
   user_data = <<-EOF
-              #!/bin/bash
+#!/bin/bash
 
-              # install aws cli (if not present)
-              yum install -y awscli
+# install awscli if not present
+#commented out for troubleshooting
+#dnf install -y awscli
 
-              # create dummy JIL export
-              echo "/* -------- P01_TEST_JOB -------- */
+cat <<EOT > /home/ec2-user/PROD.jil
+/* -------- P01_TEST_JOB -------- */
 insert_job: P01_TEST_JOB
 job_type: CMD
 command: echo hello
-machine: localhost" > /home/ec2-user/PROD.jil
+machine: localhost
+EOT
 
-              # upload to S3- trigger manually 
-              # aws s3 cp /home/ec2-user/PROD.jil s3://{bucket_name_here}/test/prod/PROD.jil
-              EOF
+chown ec2-user:ec2-user /home/ec2-user/PROD.jil
 
+EOF
   tags = {
     Name = "jil-ec2"
   }
