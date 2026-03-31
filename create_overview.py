@@ -8,7 +8,7 @@ from pathlib import Path
 # CONFIG
 # ============================================================
 
-WHITELIST_EXTENSIONS = {".py", ".txt", ".tf", ".tfvars"}
+WHITELIST_EXTENSIONS = {".py", ".txt", ".tf", ".tfvars", ".sh", ".yml"}
 
 EXCLUDE_DIRS = {
     ".git",

@@ -10,7 +10,7 @@ PAT=$(aws secretsmanager get-secret-value \
 
 
 # Clones the GitHub repository using the PAT for authentication
-git clone https://$PAT@${REPO_URL#https://}
+#git clone https://$PAT@${REPO_URL#https://}
 REPO_NAME=$(basename -s .git $REPO_URL)
 cd $REPO_NAME
 
@@ -47,7 +47,9 @@ git commit -m "Automated JIL update"
 git push origin $BRANCH
 
 
-# Opens a PR from the new branch into main using GitHub API
+git fetch origin master:master || true
+
+# Opens a PR from the new branch into master using GitHub API
 REPO_PATH=$(echo "$REPO_URL" | sed 's#https://github.com/##')
 
 PR_RESPONSE=$(curl -s -X POST https://api.github.com/repos/$REPO_PATH/pulls \
@@ -56,7 +58,7 @@ PR_RESPONSE=$(curl -s -X POST https://api.github.com/repos/$REPO_PATH/pulls \
   -d "{
     \"title\": \"Automated JIL update\",
     \"head\": \"$BRANCH\",
-    \"base\": \"main\"
+    \"base\": \"master\"
   }")
 
 PR_NUMBER=$(echo $PR_RESPONSE | jq -r .number)
