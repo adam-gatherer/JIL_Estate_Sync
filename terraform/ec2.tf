@@ -31,8 +31,11 @@ resource "aws_instance" "jil_ec2" {
 dnf install -y awscli
 aws configure set region eu-west-2
 
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
 cat <<EOT > /home/ec2-user/PROD.jil
 /* -------- P01_TEST_JOB -------- */
+/* Generated at: ${TIMESTAMP} */
 insert_job: P01_TEST_JOB
 job_type: CMD
 command: echo hello
