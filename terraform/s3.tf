@@ -39,7 +39,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "jil_exports" {
     }
 
     expiration {
-      days = 2
+      days = var.s3_lifecycle_days
     }
   }
 }
