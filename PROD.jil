@@ -1,5 +1,0 @@
-/* -------- P01_TEST_JOB -------- */
-insert_job: P01_TEST_JOB
-job_type: CMD
-command: echo hello
-machine: localhost
