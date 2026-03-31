@@ -45,7 +45,8 @@ git push origin $BRANCH
 git fetch origin master:master || true
 
 # Opens a PR from the new branch into master using GitHub API
-REPO_PATH=$(echo "$REPO_URL" | sed 's#https://github.com/##')
+REPO_PATH=${REPO_URL#https://github.com/}
+REPO_PATH=${REPO_PATH%.git}
 
 PR_RESPONSE=$(curl -s -X POST https://api.github.com/repos/$REPO_PATH/pulls \
   -H "Authorization: token $PAT" \
