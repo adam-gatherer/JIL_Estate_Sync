@@ -27,16 +27,23 @@ resource "aws_instance" "jil_ec2" {
   user_data = <<-EOF
 #!/bin/bash
 
-# install awscli if not present
-dnf install -y awscli
+# install awscli & cron if not present
+dnf install -y awscli cronie
+
+systemctl enable crond
+systemctl start crond
+
 aws configure set region eu-west-2
+
+mkdir -p /home/ec2-user/JIL
+chown -R ec2-user:ec2-user /home/ec2-user/JIL
+
+cat <<'SCRIPT' > /home/ec2-user/generate_and_upload.sh
+#!/bin/bash
 
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-mkdir -p /home/ec2-user/JIL
-
 cat <<EOT > /home/ec2-user/JIL/PROD.jil
-/* -------- P01_TEST_JOB -------- */
 /* Generated at: $${TIMESTAMP} */
 insert_job: P01_TEST_JOB
 job_type: CMD
@@ -45,7 +52,6 @@ machine: localhost
 EOT
 
 cat <<EOT > /home/ec2-user/JIL/PPE.jil
-/* -------- R01_TEST_JOB -------- */
 /* Generated at: $${TIMESTAMP} */
 insert_job: R01_TEST_JOB
 job_type: CMD
@@ -54,7 +60,6 @@ machine: localhost
 EOT
 
 cat <<EOT > /home/ec2-user/JIL/TEST.jil
-/* -------- T01_TEST_JOB -------- */
 /* Generated at: $${TIMESTAMP} */
 insert_job: T01_TEST_JOB
 job_type: CMD
@@ -62,14 +67,29 @@ command: echo hello
 machine: localhost
 EOT
 
-chown ec2-user:ec2-user /home/ec2-user/JIL/*.jil
+aws s3 cp /home/ec2-user/JIL/ s3://${local.jil_bucket_name}/jil_files/ \
+  --recursive --exclude "*" --include "*.jil"
+SCRIPT
 
-aws s3 cp /home/ec2-user/JIL/ s3://${local.jil_bucket_name}/jil_files/ --recursive --exclude "*" --include "*.jil"
+chmod +x /home/ec2-user/generate_and_upload.sh
+chown ec2-user:ec2-user /home/ec2-user/generate_and_upload.sh
+
+echo "*/5 * * * * ec2-user /home/ec2-user/generate_and_upload.sh" >> /etc/crontab
+
+for i in {1..12}; do
+  echo "Attempt $i: testing EventBridge readiness"
+
+  aws events list-targets-by-rule \
+    --rule "jil-s3-upload-trigger" \
+    --region eu-west-2 >/dev/null 2>&1 && break
+
+  sleep 5
+done
+
+sudo -u ec2-user /home/ec2-user/generate_and_upload.sh
 
 EOF
   tags = {
     Name = "jil-ec2"
   }
 }
-
-
