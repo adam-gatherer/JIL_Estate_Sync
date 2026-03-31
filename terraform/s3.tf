@@ -46,3 +46,11 @@ resource "aws_s3_bucket_lifecycle_configuration" "jil_exports" {
     }
   }
 }
+
+
+# enable eventbridge
+resource "aws_s3_bucket_notification" "eventbridge" {
+  bucket = aws_s3_bucket.jil_exports.id
+
+  eventbridge = true
+}
