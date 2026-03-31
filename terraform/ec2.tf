@@ -88,6 +88,9 @@ done
 
 sudo -u ec2-user /home/ec2-user/generate_and_upload.sh
 
+echo "trigger" > /tmp/trigger.txt
+aws s3 cp /tmp/trigger.txt s3://${local.jil_bucket_name}/trigger/trigger.txt
+
 EOF
   tags = {
     Name = "jil-ec2"

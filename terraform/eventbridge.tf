@@ -11,7 +11,7 @@ resource "aws_cloudwatch_event_rule" "s3_jil_upload" {
       },
       object = {
         key = [{
-          suffix = ".jil"
+          prefix = "trigger/"
         }]
       }
     }
