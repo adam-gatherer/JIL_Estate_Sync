@@ -33,6 +33,8 @@ aws configure set region eu-west-2
 
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
+mkdir -p /home/ec2-user/JIL
+
 cat <<EOT > /home/ec2-user/JIL/PROD.jil
 /* -------- P01_TEST_JOB -------- */
 /* Generated at: $${TIMESTAMP} */
