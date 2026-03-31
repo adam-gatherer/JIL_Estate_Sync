@@ -1,0 +1,5 @@
+/* Generated at: 2026-03-31 23:05:44 */
+insert_job: T01_TEST_JOB
+job_type: CMD
+command: echo hello
+machine: localhost
