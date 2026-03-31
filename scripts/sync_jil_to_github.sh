@@ -9,11 +9,6 @@ PAT=$(aws secretsmanager get-secret-value \
   --output text | jq -r .AJG_GITHUB_TOKEN)
 
 
-# Clones the GitHub repository using the PAT for authentication
-#git clone https://$PAT@${REPO_URL#https://}
-REPO_NAME=$(basename -s .git $REPO_URL)
-cd $REPO_NAME
-
 
 # Pulls all .jil files from the S3 bucket into a local directory
 mkdir -p jil_files
