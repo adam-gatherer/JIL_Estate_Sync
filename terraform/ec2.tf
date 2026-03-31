@@ -33,7 +33,7 @@ aws configure set region eu-west-2
 
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-cat <<EOT > /home/ec2-user/PROD.jil
+cat <<EOT > /home/ec2-user/JIL/PROD.jil
 /* -------- P01_TEST_JOB -------- */
 /* Generated at: ${TIMESTAMP} */
 insert_job: P01_TEST_JOB
@@ -42,9 +42,27 @@ command: echo hello
 machine: localhost
 EOT
 
-chown ec2-user:ec2-user /home/ec2-user/PROD.jil
+cat <<EOT > /home/ec2-user/JIL/PPE.jil
+/* -------- R01_TEST_JOB -------- */
+/* Generated at: ${TIMESTAMP} */
+insert_job: R01_TEST_JOB
+job_type: CMD
+command: echo hello
+machine: localhost
+EOT
 
-aws s3 cp /home/ec2-user/PROD.jil s3://${local.jil_bucket_name}/prod/PROD.jil
+cat <<EOT > /home/ec2-user/JIL/TEST.jil
+/* -------- T01_TEST_JOB -------- */
+/* Generated at: ${TIMESTAMP} */
+insert_job: T01_TEST_JOB
+job_type: CMD
+command: echo hello
+machine: localhost
+EOT
+
+chown ec2-user:ec2-user /home/ec2-user/JIL/*.jil
+
+aws s3 cp /home/ec2-user/JIL/ s3://${local.jil_bucket_name}/ --recursive --exclude "*" --include "*.jil"
 
 EOF
   tags = {
