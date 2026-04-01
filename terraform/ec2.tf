@@ -33,7 +33,7 @@ dnf install -y awscli cronie
 systemctl enable crond
 systemctl start crond
 
-aws configure set region eu-west-2
+aws configure set region ${var.aws_region}
 
 mkdir -p /home/ec2-user/JIL
 chown -R ec2-user:ec2-user /home/ec2-user/JIL
