@@ -28,6 +28,7 @@ Autosys is simulated exporting JIL files via an EC2 instance and uploading them 
 
 All infrastructure and runtime configuration is defined via Terraform, with key deployment variables (e.g. repository URL, AWS region, secrets, reviewers) managed through `terraform.tfvars` to enable environment-specific customisation without code changes.
 
+This project was developed as a proof of concept inspired by real-world challenges in managing and version-controlling Autosys JIL exports within enterprise environments, demonstrating a practical, production-aligned automation pattern.
 
 
 ## 2. Problem Statement
