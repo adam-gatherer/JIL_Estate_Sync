@@ -22,13 +22,14 @@
 
 ## 1. Overview
 
-This project implements an AWS-native, event-driven pipeline to automate the publishing of Autosys JIL exports to GitHub, removing manual intervention and improving auditability.
+This project implements an AWS-native, event-driven pipeline to automate the publishing of Autosys JIL exports to GitHub, replacing a manual weekly process that is often missed and results in gaps in version control and auditability.
 
-Autosys is simulated exporting JIL files via an EC2 instance and uploading them to S3. This triggers a CodeBuild job which commits the files to a GitHub repository via a secure, decoupled workflow.
+Autosys is simulated via an EC2 instance generating JIL files and uploading them to S3, which triggers EventBridge to invoke a CodeBuild job that commits the files to GitHub through a secure, decoupled workflow.
 
-All infrastructure and runtime configuration is defined via Terraform, with key deployment variables (e.g. repository URL, AWS region, secrets, reviewers) managed through `terraform.tfvars` to enable environment-specific customisation without code changes.
+All infrastructure is defined using Terraform, with environment-specific configuration managed through `terraform.tfvars` for consistent and repeatable deployments.
 
-This project was developed as a proof of concept inspired by real-world challenges in managing and version-controlling Autosys JIL exports within enterprise environments, demonstrating a practical, production-aligned automation pattern.
+This proof of concept demonstrates a production-aligned solution to a real operational problem, improving reliability, auditability, and automation of JIL estate management.
+
 
 
 ## 2. Problem Statement
