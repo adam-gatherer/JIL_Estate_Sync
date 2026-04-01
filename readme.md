@@ -13,12 +13,12 @@
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge\&logo=github\&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-121011?style=for-the-badge\&logo=gnu-bash\&logoColor=white)
 
----
+
 
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Built With](https://img.shields.io/badge/built%20with-Terraform-blue)
 
----
+
 
 ## 1. Overview
 
@@ -28,7 +28,7 @@ Autosys is simulated exporting JIL files via an EC2 instance and uploading them 
 
 All infrastructure and runtime configuration is defined via Terraform, with key deployment variables (e.g. repository URL, AWS region, secrets, reviewers) managed through `terraform.tfvars` to enable environment-specific customisation without code changes.
 
----
+
 
 ## 2. Problem Statement
 
@@ -40,7 +40,7 @@ Autosys JIL exports are currently committed to GitHub manually, creating:
 
 This project eliminates the manual step by introducing a secure, automated pipeline using AWS managed services, aligning with cloud migration and improving reliability, traceability, and consistency.
 
----
+
 
 ## 3. Architecture
 
@@ -59,7 +59,7 @@ flowchart TD
     G --> H[GitHub Repository]
 ```
 
----
+
 
 ## 4. How It Works
 
@@ -78,7 +78,7 @@ flowchart TD
 6. Optional reviewers are automatically added (configured via Terraform)
 7. Repo reflects latest scheduler state via PR workflow
 
----
+
 
 ## 5. Tech Stack
 
@@ -92,7 +92,7 @@ flowchart TD
 * Terraform (infrastructure as code)
 * Bash (automation scripting)
 
----
+
 
 ## 6. Repository Structure
 
@@ -117,7 +117,7 @@ flowchart TD
 │   └── terraform.tfvars
 ```
 
----
+
 
 ## 7. Setup / Deployment (Terraform)
 
@@ -160,7 +160,7 @@ terraform apply
 * EventBridge trigger
 * Secrets Manager secret (GitHub PAT reference)
 
----
+
 
 ## 8. Example Output (PR + JIL files)
 
@@ -183,7 +183,7 @@ machine: localhost
 
 This results in a consistent, auditable history of scheduler state via GitHub pull requests.
 
----
+
 
 ## 9. Security Considerations
 
@@ -194,7 +194,7 @@ This results in a consistent, auditable history of scheduler state via GitHub pu
 * **Private S3 bucket** - public access blocked
 * **Auditability** - all changes tracked via GitHub PRs
 
----
+
 
 ## 10. Limitations / Future Improvements
 
@@ -205,7 +205,7 @@ This results in a consistent, auditable history of scheduler state via GitHub pu
 * **Scalability considerations** - optimise for very large JIL estates
 * **PR auto-merge option** - optional workflow for fully hands-off updates
 
----
+
 
 ## 11. Development Process & Design Rationale
 
@@ -220,7 +220,7 @@ Since direct access to a production Autosys system was not available:
 
 This preserves architectural intent while keeping the system reproducible.
 
----
+
 
 ### Key Design Choices
 
@@ -262,7 +262,7 @@ This mirrors real-world separation of concerns.
 
 Improves maintainability vs embedding logic in buildspec.
 
----
+
 
 ### Mistakes & Iterations
 
@@ -298,7 +298,7 @@ Improves maintainability vs embedding logic in buildspec.
 
 Trade-off made for reproducibility.
 
----
+
 
 ### Final Outcome
 
